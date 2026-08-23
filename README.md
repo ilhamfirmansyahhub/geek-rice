@@ -1,4 +1,7 @@
 # Geek Rice
+
+![Berzerk desktop](assets/berzerk.png)
+
 My personal rice, built around Ryoku, Brain_Shell and Brain Desktop.
 
 ## What this is
@@ -103,9 +106,3 @@ See `LICENSES/` for included third-party license notices.
 ## Author
 
 Ilham Firmansyah
-
-## Preview
-
-![Berzerk desktop](assets/berzerk.png)
-
-![Berzerk desktop](assets/berzerk.png)
