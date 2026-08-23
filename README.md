@@ -1,6 +1,5 @@
 # Geek Rice
-
-Public Arch Linux / Hyprland rice by **Ilham Firmansyah**, built around Ryoku, Brain_Shell and Brain Desktop.
+My personal rice, built around Ryoku, Brain_Shell and Brain Desktop.
 
 ## What this is
 
