@@ -103,3 +103,7 @@ See `LICENSES/` for included third-party license notices.
 ## Author
 
 Ilham Firmansyah
+
+## Preview
+
+![Berzerk desktop](assets/berzerk.png)
