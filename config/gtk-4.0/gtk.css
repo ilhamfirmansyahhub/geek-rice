@@ -1,0 +1,52 @@
+/* Ryoku palette -> GTK. Rendered by matugen; do not edit. One file themes both
+   toolkits: libadwaita / GTK 4 read the *_color names, classic GTK 3 (Adwaita)
+   reads the @theme_* names. Each toolkit ignores the other's names, so both sets
+   live together. Values are Material 3 role names (the same roles the shell and
+   the reference paint with), so a wallpaper scheme reaches the whole app suite
+   with the identical semantics, not a base16 approximation. */
+
+/* --- libadwaita / GTK 4 (Files, text editors, GNOME apps) --- */
+@define-color accent_color #1E9177;
+@define-color accent_bg_color #1E9177;
+@define-color accent_fg_color #B8C8C4;
+@define-color window_bg_color #081512;
+@define-color window_fg_color #A6B5B1;
+@define-color view_bg_color #081512;
+@define-color view_fg_color #A6B5B1;
+@define-color headerbar_bg_color #0F251F;
+@define-color headerbar_fg_color #A6B5B1;
+@define-color headerbar_border_color #123c32;
+@define-color headerbar_backdrop_color #081512;
+@define-color card_bg_color #0c1d19;
+@define-color card_fg_color #A6B5B1;
+@define-color dialog_bg_color #133b31;
+@define-color dialog_fg_color #A6B5B1;
+@define-color popover_bg_color #0F251F;
+@define-color popover_fg_color #A6B5B1;
+@define-color sidebar_bg_color #0c1d19;
+@define-color sidebar_fg_color #A6B5B1;
+@define-color destructive_color #933636;
+@define-color destructive_bg_color #933636;
+@define-color destructive_fg_color #B8C8C4;
+@define-color warning_color #26A589;
+@define-color success_color #167A63;
+
+/* --- classic GTK 3 (Adwaita named palette) --- */
+@define-color theme_bg_color #081512;
+@define-color theme_fg_color #A6B5B1;
+@define-color theme_base_color #081512;
+@define-color theme_text_color #A6B5B1;
+@define-color theme_selected_bg_color #1E9177;
+@define-color theme_selected_fg_color #B8C8C4;
+@define-color theme_unfocused_bg_color #081512;
+@define-color theme_unfocused_fg_color #A6B5B1;
+@define-color theme_unfocused_base_color #081512;
+@define-color theme_unfocused_text_color #A6B5B1;
+@define-color theme_unfocused_selected_bg_color #1E9177;
+@define-color theme_unfocused_selected_fg_color #B8C8C4;
+@define-color insensitive_bg_color #0F251F;
+@define-color insensitive_fg_color #99A8A4;
+@define-color insensitive_base_color #081512;
+@define-color borders #123c32;
+@define-color unfocused_borders #123c32;
+@define-color error_color #933636;

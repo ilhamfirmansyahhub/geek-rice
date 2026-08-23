@@ -1,0 +1,234 @@
+{
+  "schema": 1,
+  "slug": "geek-rice",
+  "name": "geek rice",
+  "author": "geek",
+  "createdWith": "0.34.9",
+  "color": {
+    "mode": "fixed",
+    "palette": "palette.json",
+    "themeApps": true
+  },
+  "assets": {
+    "wallpaper": "wall.jpg"
+  },
+  "look": {
+    "decor": {},
+    "hypr": {},
+    "launcher": {
+      "bgBlur": 2,
+      "heroImage": "",
+      "heroPosX": 0.5,
+      "heroPosY": 0.5,
+      "heroStrength": 0.6,
+      "radius": 16,
+      "resultSettleMs": 360,
+      "showGreeting": true,
+      "showWeather": true
+    },
+    "shell": {
+      "fontFamily": "Space Grotesk",
+      "fontScale": 1.35,
+      "frameBars": {
+        "dock": {
+          "pinned": []
+        },
+        "menus": {
+          "quick-settings": {
+            "anchor": "left",
+            "expansion": "always",
+            "minWidth": 410,
+            "modules": [
+              "home",
+              "notifications",
+              "weather",
+              "capture"
+            ],
+            "widgets": [
+              "quick-settings"
+            ]
+          },
+          "theme": {
+            "anchor": "right",
+            "expansion": "never",
+            "minWidth": 320,
+            "widgets": [
+              "theme"
+            ]
+          },
+          "wallpaper": {
+            "anchor": "bottom",
+            "expansion": "always",
+            "minWidth": 1400,
+            "widgets": [
+              "theme",
+              "wallpaper"
+            ]
+          },
+          "weather": {
+            "anchor": "right",
+            "expansion": "never",
+            "minWidth": 320,
+            "widgets": [
+              "weather"
+            ]
+          }
+        },
+        "rails": {
+          "bottom": {
+            "center": [],
+            "enabled": false,
+            "end": [],
+            "reveal": true,
+            "size": 32,
+            "start": []
+          },
+          "left": {
+            "bottom": [
+              "recording",
+              "tray",
+              "audio-input",
+              "audio-output",
+              "bluetooth",
+              "network",
+              "clock",
+              "battery"
+            ],
+            "center": [
+              "dock"
+            ],
+            "enabled": true,
+            "reveal": true,
+            "size": 48,
+            "top": [
+              "quick-settings",
+              "workspaces"
+            ]
+          },
+          "right": {
+            "bottom": [],
+            "center": [],
+            "enabled": false,
+            "reveal": true,
+            "size": 48,
+            "top": []
+          },
+          "top": {
+            "center": [],
+            "enabled": false,
+            "end": [],
+            "reveal": true,
+            "size": 32,
+            "start": []
+          }
+        },
+        "style": "slate-frame",
+        "surfaces": {
+          "stash": {
+            "anchor": "right",
+            "minWidth": 340,
+            "panes": [
+              "stash"
+            ]
+          }
+        },
+        "version": 1
+      },
+      "frameCorner": 8,
+      "frameEnabled": true,
+      "frameOpacity": 1,
+      "osdOpacity": 1,
+      "osdRadius": 0
+    },
+    "visualizer": {
+      "adaptive": true,
+      "angle": 0,
+      "bars": 64,
+      "bloom": 0.6,
+      "enabled": true,
+      "fps": 30,
+      "gain": 1,
+      "grow": "up",
+      "h": 0.42,
+      "idleWave": true,
+      "mirror": false,
+      "peaks": false,
+      "reflection": 0.1,
+      "segments": 10,
+      "shape": "rounded",
+      "smoothing": 0.5,
+      "spin": 0,
+      "style": "bars",
+      "thickness": 0.58,
+      "tiltX": 0,
+      "tiltY": 0,
+      "w": 1,
+      "x": 0,
+      "y": 0.58
+    },
+    "widgets": {
+      "aioAnchor": "top-right",
+      "aioEnabled": false,
+      "aioLocked": false,
+      "aioOpacity": 1,
+      "aioScale": 1,
+      "aioStyle": "wide",
+      "aioX": 80,
+      "aioY": 80,
+      "calendarAnchor": "bottom-right",
+      "calendarEnabled": true,
+      "calendarHolidayRegion": "",
+      "calendarLocked": false,
+      "calendarOpacity": 1,
+      "calendarScale": 1,
+      "calendarStyle": "glass",
+      "calendarWeekNumbers": true,
+      "calendarWeeks": 6,
+      "calendarX": 80,
+      "calendarY": 80,
+      "clock24h": true,
+      "clockAccent": "palette",
+      "clockAnchor": "free",
+      "clockBg": "none",
+      "clockDesign": "digital",
+      "clockEnabled": true,
+      "clockLocked": false,
+      "clockOpacity": 1,
+      "clockRadius": 26,
+      "clockScale": 1,
+      "clockSeconds": false,
+      "clockX": 64,
+      "clockY": 96,
+      "dateDesign": "inline",
+      "dateShow": true,
+      "musicAnchor": "free",
+      "musicApp": "",
+      "musicEnabled": false,
+      "musicLocked": false,
+      "musicLyrics": true,
+      "musicOpacity": 1,
+      "musicScale": 1,
+      "musicShape": "wide",
+      "musicStyle": "cover",
+      "musicVideo": "canvas",
+      "musicVideoFile": "",
+      "musicX": 608,
+      "musicY": 704,
+      "statsAnchor": "bottom-right",
+      "statsEnabled": false,
+      "statsLocked": false,
+      "statsOpacity": 1,
+      "statsScale": 1,
+      "statsX": 80,
+      "statsY": 80
+    }
+  },
+  "layers": {
+    "brand": {
+      "markImage": "",
+      "markText": "力",
+      "markTint": true,
+      "name": "Ryoku"
+    }
+  }
+}

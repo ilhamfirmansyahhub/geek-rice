@@ -1,0 +1,25 @@
+# The screen-share source chooser xdph launches (ryoku/hyprland/xdph.conf names
+# the binary). Only the keys that differ from upstream's defaults are set.
+#
+# Paths resolve against this file's directory, so the palette matugen renders on
+# every wallpaper change has to be reached relatively. A palette not rendered yet
+# is a warning, not an error: the picker opens wearing stock GTK.
+stylesheets: ["../../.cache/ryoku/share-picker.css"]
+
+# Outputs always has something in it; a toplevel list can be empty.
+default_page: outputs
+
+# xdph.conf already answers this (allow_token_by_default).
+hide_token_restore: true
+
+image:
+  # Twice widget_size, so a card is sharp on a HiDPI panel and no sharper.
+  resize_size: 320
+
+windows:
+  clicks: 1
+
+outputs:
+  clicks: 1
+  # Two previews of the same wallpaper are indistinguishable without the name.
+  show_label: true

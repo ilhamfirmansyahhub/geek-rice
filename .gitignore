@@ -1,0 +1,32 @@
+# Geek Rice - public repository
+
+# Secrets / credentials
+.env
+.env.*
+*.key
+*.pem
+*.token
+*.secret
+keyring.json
+
+# Runtime / generated state
+*.lock
+history
+Cache/
+cache/
+GPUCache/
+Code Cache/
+Crashpad/
+Session Storage/
+Local Storage/
+Cookies*
+Trust Tokens*
+monitors-applied.json
+pulse-cookie
+.npmrc
+
+# Editor / temporary files
+*.swp
+*.swo
+*~
+.DS_Store

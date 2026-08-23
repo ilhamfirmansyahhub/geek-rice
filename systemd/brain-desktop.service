@@ -1,0 +1,11 @@
+[Unit]
+Description=Brain Desktop Top Shell
+After=graphical-session.target
+
+[Service]
+ExecStart=/usr/bin/quickshell -c %h/.config/quickshell/brain-desktop
+Restart=on-failure
+RestartSec=2
+
+[Install]
+WantedBy=default.target
