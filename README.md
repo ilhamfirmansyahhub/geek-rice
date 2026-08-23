@@ -75,4 +75,14 @@ Existing conflicting configuration is backed up before installation.
 
 ## Author
 
-geek
+Ilham Firmansyah
+
+## Credits
+
+This rice includes third-party components:
+
+- Brain_Shell — https://github.com/Brainitech/Brain_Shell — MIT License
+- Ryoku — https://github.com/neur0map/ryoku-arch
+- Quickshell — https://github.com/quickshell-mirror/quickshell
+
+See LICENSES/ for included third-party license notices.

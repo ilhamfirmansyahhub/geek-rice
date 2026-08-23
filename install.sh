@@ -84,8 +84,10 @@ if systemctl --user cat cliphist-wipe.service >/dev/null 2>&1; then
     systemctl --user enable cliphist-wipe.service >/dev/null
 fi
 
-if systemctl --user cat voxtype.service >/dev/null 2>&1; then
+if command -v voxtype >/dev/null 2>&1 && systemctl --user cat voxtype.service >/dev/null 2>&1; then
     systemctl --user enable voxtype.service >/dev/null
+else
+    warn "Voxtype not installed; skipping voxtype.service."
 fi
 
 info "Reloading Ryoku..."
