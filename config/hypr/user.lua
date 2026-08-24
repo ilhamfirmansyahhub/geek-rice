@@ -18,3 +18,10 @@
 -- hl.bind("SUPER + SHIFT + T", hl.dsp.exec_cmd("kitty"))
 -- hl.window_rule({ name = "float-mpv", match = { class = "mpv" }, float = true })
 -- hl.config({ general = { border_size = 3 } })
+
+-- Persistent personal override: keep mouse focus following the pointer.
+hl.config({
+    input = {
+        follow_mouse = 1,
+    },
+})
