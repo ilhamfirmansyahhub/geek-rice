@@ -29,7 +29,7 @@ hl.bind("SUPER + C", hl.dsp.exec_cmd("qs ipc -c " .. shell .. " call dashboard-c
 
 -- Popups
 hl.bind("SUPER + ESCAPE", hl.dsp.exec_cmd("qs ipc -c " .. shell .. " call PowerMenu-toggle toggle"))
-hl.bind("SUPER + N", hl.dsp.exec_cmd("qs ipc -c " .. shell .. " call notification-toggle toggle"))
+-- SUPER + N intentionally left free for the user's own Hyprland binding (Kate).
 hl.bind("SUPER + W", hl.dsp.exec_cmd("qs ipc -c " .. shell .. " call wallpaper-toggle toggle"))
 hl.bind("SUPER + V", hl.dsp.exec_cmd("qs ipc -c " .. shell .. " call clipboard-toggle toggle"))
 
