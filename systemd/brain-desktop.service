@@ -1,9 +1,11 @@
 [Unit]
 Description=Brain Desktop Top Shell
 After=graphical-session.target
+PartOf=graphical-session.target
 
 [Service]
-ExecStart=/usr/bin/quickshell -c %h/.config/quickshell/brain-desktop
+Type=simple
+ExecStart=/usr/bin/quickshell -c %h/.local/share/brain-desktop
 Restart=on-failure
 RestartSec=2
 
