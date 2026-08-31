@@ -3,6 +3,9 @@ set -euo pipefail
 
 REPO_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 CONFIG_DIR="$HOME/.config"
+DATA_DIR="$HOME/.local/share"
+BRAIN_DESKTOP_SOURCE="$REPO_DIR/config/quickshell/brain-desktop"
+BRAIN_DESKTOP_DIR="$DATA_DIR/brain-desktop"
 BACKUP_DIR="$CONFIG_DIR/geek-rice-backup-$(date +%Y%m%d-%H%M%S)"
 
 info() { printf "\033[1;36m==>\033[0m %s\n" "$1"; }
@@ -12,7 +15,7 @@ fail() { printf "\033[1;31mERROR:\033[0m %s\n" "$1" >&2; exit 1; }
 [[ $EUID -ne 0 ]] || fail "Do not run this installer as root."
 [[ -f /etc/arch-release ]] || fail "Geek Rice currently targets Arch Linux."
 
-for cmd in git pacman sudo; do
+for cmd in git pacman sudo cp find grep; do
     command -v "$cmd" >/dev/null 2>&1 || fail "Missing required command: $cmd"
 done
 
@@ -69,7 +72,7 @@ else
 fi
 
 info "Creating configuration backup..."
-mkdir -p "$BACKUP_DIR"
+mkdir -p "$BACKUP_DIR" "$DATA_DIR"
 
 BACKUP_ITEMS=(
     "Brain_Shell"
@@ -87,7 +90,6 @@ BACKUP_ITEMS=(
     "nvim"
     "qt5ct"
     "qt6ct"
-    "quickshell/brain-desktop"
     "ryoku/user_edits"
     "wayle"
     "xsettingsd"
@@ -102,9 +104,31 @@ for item in "${BACKUP_ITEMS[@]}"; do
     fi
 done
 
+# Brain Desktop used to live under ~/.config/quickshell. Keep that path only as
+# a migration source; the managed installation target is ~/.local/share/brain-desktop
+# so Ryoku updates cannot overwrite the Brain Desktop working tree.
+if [[ -e "$BRAIN_DESKTOP_DIR" ]]; then
+    mkdir -p "$BACKUP_DIR/brain-desktop"
+    cp -a "$BRAIN_DESKTOP_DIR" "$BACKUP_DIR/brain-desktop/current"
+fi
+
+if [[ -e "$CONFIG_DIR/quickshell/brain-desktop" ]]; then
+    mkdir -p "$BACKUP_DIR/quickshell"
+    cp -a "$CONFIG_DIR/quickshell/brain-desktop" "$BACKUP_DIR/quickshell/brain-desktop"
+fi
+
 info "Installing Geek configuration..."
 mkdir -p "$CONFIG_DIR"
 cp -a "$REPO_DIR/config/." "$CONFIG_DIR/"
+
+# Remove the Brain Desktop copy from the Ryoku-managed ~/.config tree and
+# install the canonical copy under ~/.local/share instead.
+rm -rf "$CONFIG_DIR/quickshell/brain-desktop"
+rm -rf "$BRAIN_DESKTOP_DIR"
+mkdir -p "$DATA_DIR"
+cp -a "$BRAIN_DESKTOP_SOURCE" "$BRAIN_DESKTOP_DIR"
+chmod +x "$BRAIN_DESKTOP_DIR"/src/scripts/*.sh "$BRAIN_DESKTOP_DIR"/src/scripts/*.py 2>/dev/null || true
+info "Brain Desktop installed to $BRAIN_DESKTOP_DIR"
 
 info "Installing Geek rice presets..."
 mkdir -p "$CONFIG_DIR/ryoku/rices"
@@ -136,6 +160,7 @@ ryoku reload || warn "Ryoku reload failed; restart the Hyprland session manually
 echo
 printf "Geek Rice installation complete.\n"
 printf "Backup: %s\n" "$BACKUP_DIR"
+printf "Brain Desktop: %s\n" "$BRAIN_DESKTOP_DIR"
 echo
 printf "Next step:\n"
 printf "  Open Ryoku Hub → Rices → select a Geek rice → Apply.\n"
