@@ -34,10 +34,12 @@ Run the installer:
 ./install.sh
 ```
 
+Before installing packages, the installer shows the complete package list declared by `packages/pacman.txt`, reports which packages are already installed and which packages are missing, then asks for confirmation. Enter `Y` to continue or `N` to cancel. Only missing packages are passed to pacman.
+
 The installer will:
 
 1. Check that the system is Arch Linux and that Ryoku is installed.
-2. Install the packages listed in `packages/pacman.txt`.
+2. Show the package installation plan and ask for confirmation before installing missing packages.
 3. Back up conflicting Geek configuration paths under `~/.config/geek-rice-backup-*`.
 4. Install the Geek configuration, Brain Desktop and related assets.
 5. Install the included Ryoku rice presets.
