@@ -75,6 +75,11 @@ if status is-interactive
     alias lt 'eza --tree --level=2 --long --icons --git'
     alias lta 'lt -a'
   end
+
+  # quick fastfetch alias.
+  if command -v fastfetch >/dev/null 2>&1
+    alias ff 'fastfetch'
+  end
 end
 
 # user overrides: ~/.config/fish/user.fish is never shipped, never touched on
