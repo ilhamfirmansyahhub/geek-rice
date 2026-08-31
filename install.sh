@@ -22,10 +22,50 @@ fi
 
 info "Detected Ryoku: $(ryoku version 2>/dev/null || printf "unknown")"
 
-info "Installing required packages..."
+info "Checking required packages..."
 mapfile -t PACKAGES < <(grep -Ev "^[[:space:]]*(#|$)" "$REPO_DIR/packages/pacman.txt")
-if ((${#PACKAGES[@]})); then
-    sudo pacman -S --needed -- "${PACKAGES[@]}"
+
+MISSING_PACKAGES=()
+INSTALLED_PACKAGES=()
+
+for package in "${PACKAGES[@]}"; do
+    if pacman -Qq "$package" >/dev/null 2>&1; then
+        INSTALLED_PACKAGES+=("$package")
+    else
+        MISSING_PACKAGES+=("$package")
+    fi
+done
+
+printf "\nPackages declared by Geek Rice:\n"
+for package in "${PACKAGES[@]}"; do
+    printf "  - %s\n" "$package"
+done
+
+printf "\nAlready installed: %d package(s)\n" "${#INSTALLED_PACKAGES[@]}"
+printf "Packages to install: %d package(s)\n" "${#MISSING_PACKAGES[@]}"
+
+if ((${#MISSING_PACKAGES[@]})); then
+    printf "\nMissing packages:\n"
+    for package in "${MISSING_PACKAGES[@]}"; do
+        printf "  + %s\n" "$package"
+    done
+
+    printf "\nGeek Rice needs the missing packages listed above. Continue? [Y/n] "
+    read -r answer
+    case "${answer:-Y}" in
+        Y|y|YES|yes|Yes)
+            info "Installing required packages..."
+            sudo pacman -S --needed -- "${MISSING_PACKAGES[@]}"
+            ;;
+        N|n|NO|no|No)
+            fail "Installation cancelled by user."
+            ;;
+        *)
+            fail "Please answer Y or N. Installation cancelled."
+            ;;
+    esac
+else
+    info "All required packages are already installed."
 fi
 
 info "Creating configuration backup..."
