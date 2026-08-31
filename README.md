@@ -41,10 +41,13 @@ The installer will:
 1. Check that the system is Arch Linux and that Ryoku is installed.
 2. Show the package installation plan and ask for confirmation before installing missing packages.
 3. Back up conflicting Geek configuration paths under `~/.config/geek-rice-backup-*`.
-4. Install the Geek configuration, Brain Desktop and related assets.
-5. Install the included Ryoku rice presets.
-6. Install the included user systemd services.
-7. Reload Ryoku.
+4. Install the Geek configuration and related assets.
+5. Install Brain Desktop into `~/.local/share/brain-desktop`, outside the Ryoku-managed `~/.config/quickshell` tree.
+6. Install the included Ryoku rice presets.
+7. Install the included user systemd services.
+8. Reload Ryoku.
+
+The Brain Desktop source is stored in the repository under `config/quickshell/brain-desktop`, but the installer deliberately installs it to `~/.local/share/brain-desktop`. This prevents Ryoku updates from using the old `~/.config/quickshell/brain-desktop` path as the live Brain Desktop working tree.
 
 The installer does **not** run as root and does not intentionally copy browser profiles, credentials, caches or other private home-directory data.
 
