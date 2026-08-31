@@ -8,29 +8,15 @@ local function optional(mod)
     if package.searchpath == nil or package.searchpath(mod, package.path) then
         local ok, err = pcall(require, mod)
         if not ok then
-            -- degrade, but say so: a syntax error in a hand-edited drop-in
-            -- (user.lua, monitors_user.lua) otherwise vanishes without a trace
-            -- and the user is left guessing why their edits do nothing.
             print("ryoku: optional config module '" .. mod .. "' failed to load: " .. tostring(err))
         end
     end
 end
 
 require("modules.env")
--- keyboard.lua is user-owned and seeded once, so an update never repairs it. a
--- hard require made a torn one fail the whole config: emergency mode, black
--- outputs, and a login loop no snapshot fixed, since ~/.config rides /home.
--- degrade to Hyprland's default layout instead; ryoku doctor reseeds the file.
 optional("keyboard")
--- hardware drop-ins, written at runtime: ryoku-gpu emits gpu.lua, ryoku-monitor
--- emits monitors.lua, both rewritten on a hotplug or GPU reset. ryoku doctor
--- repairs a corrupt one, autoscale regenerates it next login.
 optional("gpu")
 optional("monitors")
--- hand-written overrides: ~/.config/hypr/monitors_user.lua, never shipped,
--- never touched by ryoku-monitor. loaded after the generated monitors.lua so a
--- pinned panel (fake-EDID needing a forced mode or modeline, a pinned layout)
--- wins. see monitors_user.lua.example.
 optional("monitors_user")
 require("modules.displays")
 require("modules.input")
@@ -58,13 +44,9 @@ optional("settings")
 optional("modules.perf_saver")
 
 optional("modules.private")
-
--- GhostType hotkey (the app owns it)
 optional("ghosttype")
 
--- last word: ~/.config/hypr/user.lua. seeded once with a header explaining the
--- load order, then yours; never touched by updates.
+-- last word: ~/.config/hypr/user.lua. This file is user-owned and is not
+-- modified by Ryoku updates. Persistent Geek Rice overrides, including the
+-- Brain Desktop integration, live there.
 optional("user")
-
--- Brain_ShellKeybinds
-dofile(os.getenv("HOME") .. "/.config/Brain_Shell/Brain_ShellKeybinds.lua")
