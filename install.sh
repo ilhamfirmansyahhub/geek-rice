@@ -6,6 +6,7 @@ CONFIG_DIR="$HOME/.config"
 DATA_DIR="$HOME/.local/share"
 BRAIN_DESKTOP_SOURCE="$REPO_DIR/config/quickshell/brain-desktop"
 BRAIN_DESKTOP_DIR="$DATA_DIR/brain-desktop"
+RYOKU_USER_EDITS="$CONFIG_DIR/ryoku/user_edits"
 BACKUP_DIR="$CONFIG_DIR/geek-rice-backup-$(date +%Y%m%d-%H%M%S)"
 
 info() { printf "\033[1;36m==>\033[0m %s\n" "$1"; }
@@ -15,7 +16,7 @@ fail() { printf "\033[1;31mERROR:\033[0m %s\n" "$1" >&2; exit 1; }
 [[ $EUID -ne 0 ]] || fail "Do not run this installer as root."
 [[ -f /etc/arch-release ]] || fail "Geek Rice currently targets Arch Linux."
 
-for cmd in git pacman sudo cp find grep; do
+for cmd in git pacman sudo cp find grep install; do
     command -v "$cmd" >/dev/null 2>&1 || fail "Missing required command: $cmd"
 done
 
@@ -104,9 +105,6 @@ for item in "${BACKUP_ITEMS[@]}"; do
     fi
 done
 
-# Brain Desktop used to live under ~/.config/quickshell. Keep that path only as
-# a migration source; the managed installation target is ~/.local/share/brain-desktop
-# so Ryoku updates cannot overwrite the Brain Desktop working tree.
 if [[ -e "$BRAIN_DESKTOP_DIR" ]]; then
     mkdir -p "$BACKUP_DIR/brain-desktop"
     cp -a "$BRAIN_DESKTOP_DIR" "$BACKUP_DIR/brain-desktop/current"
@@ -121,8 +119,17 @@ info "Installing Geek configuration..."
 mkdir -p "$CONFIG_DIR"
 cp -a "$REPO_DIR/config/." "$CONFIG_DIR/"
 
-# Remove the Brain Desktop copy from the Ryoku-managed ~/.config tree and
-# install the canonical copy under ~/.local/share instead.
+# Keep Brain Shell in Ryoku's user-owned overlay so Ryoku re-deploys the
+# integration after updates. The source application itself lives outside
+# ~/.config so it is not treated as a Ryoku-managed Quickshell config tree.
+mkdir -p "$RYOKU_USER_EDITS/Brain_Shell"
+cp -a "$REPO_DIR/config/Brain_Shell/Brain_ShellKeybinds.lua" \
+      "$RYOKU_USER_EDITS/Brain_Shell/Brain_ShellKeybinds.lua"
+cp -a "$REPO_DIR/config/Brain_Shell/Brain_ShellKeybinds.conf" \
+      "$RYOKU_USER_EDITS/Brain_Shell/Brain_ShellKeybinds.conf"
+
+# Remove any legacy Brain Desktop copy from the Ryoku-managed Quickshell tree
+# and install the canonical copy under ~/.local/share instead.
 rm -rf "$CONFIG_DIR/quickshell/brain-desktop"
 rm -rf "$BRAIN_DESKTOP_DIR"
 mkdir -p "$DATA_DIR"
@@ -154,6 +161,13 @@ else
     warn "Voxtype not installed; skipping voxtype.service."
 fi
 
+info "Installing system-level persistence hook..."
+sudo install -Dm755 "$REPO_DIR/system/geek-rice-restore-system.sh" \
+    /usr/local/bin/geek-rice-restore-system.sh
+sudo install -Dm644 "$REPO_DIR/system/pacman-hooks/95-geek-rice-restore.hook" \
+    /etc/pacman.d/hooks/95-geek-rice-restore.hook
+sudo /usr/local/bin/geek-rice-restore-system.sh
+
 info "Reloading Ryoku..."
 ryoku reload || warn "Ryoku reload failed; restart the Hyprland session manually."
 
@@ -161,6 +175,7 @@ echo
 printf "Geek Rice installation complete.\n"
 printf "Backup: %s\n" "$BACKUP_DIR"
 printf "Brain Desktop: %s\n" "$BRAIN_DESKTOP_DIR"
+printf "Persistent system hook: /etc/pacman.d/hooks/95-geek-rice-restore.hook\n"
 echo
 printf "Next step:\n"
 printf "  Open Ryoku Hub → Rices → select a Geek rice → Apply.\n"
