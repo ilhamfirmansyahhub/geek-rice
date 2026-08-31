@@ -1,0 +1,20 @@
+[Trigger]
+Operation = Install
+Operation = Upgrade
+Type = Package
+Target = ryoku
+Target = ryoku-blobs
+Target = ryoku-cursors
+Target = ryoku-desktop
+Target = ryoku-hub
+Target = ryoku-hypr-plugins
+Target = ryoku-oh-my-zsh
+Target = ryoku-rashin
+Target = ryoku-shell
+Target = sddm
+Target = plymouth
+
+[Action]
+Description = Restoring Geek Rice system configuration...
+When = PostTransaction
+Exec = /usr/local/bin/geek-rice-restore-system.sh
